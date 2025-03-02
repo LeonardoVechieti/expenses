@@ -11,9 +11,6 @@ void main() {
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
 
-
-  
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -21,18 +18,20 @@ class HomePage extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Despesas Pessoais'),
         ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-              child: const Card(
-                color: Colors.blue,
-                elevation: 5,
-                child: Text('Grafico'),
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Container(
+                child: const Card(
+                  color: Colors.blue,
+                  elevation: 5,
+                  child: Text('Grafico'),
+                ),
               ),
-            ),
-            TransactionUser(),
-          ],
+              TransactionUser(),
+            ],
+          ),
         ),
       ),
     );
