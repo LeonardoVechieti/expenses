@@ -15,10 +15,22 @@ class App extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Despesas Pessoais',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
       home: const HomePage(),
+      theme: ThemeData(
+        useMaterial3: false, 
+        fontFamily: 'Quicksand',
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.purple,
+          foregroundColor: Colors.white,
+
+         
+        ),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.amber,
+          primary: Colors.purple,
+          secondary: Colors.amber,
+        ),
+      ),
     );
   }
 }
@@ -32,42 +44,42 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final List<Transaction> _transactions = [
-    Transaction(
-      id: 't1',
-      title: 'Novo Tênis de Corrida',
-      value: 310.76,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't2',
-      title: 'Conta de Luz',
-      value: 211.30,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't3',
-      title: 'Conta de Água',
-      value: 100.30,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't4',
-      title: 'Conta de Telefone',
-      value: 50.30,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't5',
-      title: 'Cartão de Crédito',
-      value: 150.30,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't6',
-      title: 'Empréstimo',
-      value: 500.30,
-      date: DateTime.now(),
-    ),
+    // Transaction(
+    //   id: 't1',
+    //   title: 'Novo Tênis de Corrida',
+    //   value: 310.76,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: 't2',
+    //   title: 'Conta de Luz',
+    //   value: 211.30,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: 't3',
+    //   title: 'Conta de Água',
+    //   value: 100.30,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: 't4',
+    //   title: 'Conta de Telefone',
+    //   value: 50.30,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: 't5',
+    //   title: 'Cartão de Crédito',
+    //   value: 150.30,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: 't6',
+    //   title: 'Empréstimo',
+    //   value: 500.30,
+    //   date: DateTime.now(),
+    // ),
   ];
 
   void _addTransaction(String title, double value) {
