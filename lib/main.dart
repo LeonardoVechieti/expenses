@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'models/transaction.dart';
 import 'package:expenses/components/transaction_form.dart';
 import 'package:expenses/components/transaction_list.dart';
+import 'dart:io';
 
 void main() {
   runApp(const App());
@@ -140,9 +141,11 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+
+    final _mediaQuery = MediaQuery.of(context);
     //Verificando a orientação da tela
     bool isLandscape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
+        _mediaQuery.orientation == Orientation.landscape;
 
     final appBar = AppBar(
       title: const Text('Despesas Pessoais'),
@@ -164,9 +167,9 @@ class _HomePageState extends State<HomePage> {
 
     
     //Definindo a altura disponível para a tela para que o app seja responsivo
-    final availabelHeight = MediaQuery.of(context).size.height -
+    final availabelHeight = _mediaQuery.size.height -
         appBar.preferredSize.height -
-        MediaQuery.of(context).padding.top;
+        _mediaQuery.padding.top;
 
     return Scaffold(
       appBar: appBar,
@@ -174,31 +177,32 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // if (isLandscape)
-            //   Row(
-            //     mainAxisAlignment: MainAxisAlignment.center,
-            //     children: [
-            //       Text('Exibir Gráfico'),
-            //       Switch(
-            //         value: _showChart,
-            //         onChanged: (value) {
-            //           setState(() {
-            //             _showChart = value;
-            //           });
-            //         },
-            //       ),
-            //     ],
-            //   ),
+            //if (isLandscape)
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     Text('Exibir Gráfico'),
+              //     Switch.adaptive(
+              //       activeColor: Theme.of(context).colorScheme.secondary,
+              //       value: _showChart,
+              //       onChanged: (value) {
+              //         setState(() {
+              //           _showChart = value;
+              //         });
+              //       },
+              //     ),
+              //   ],
+              // ),
             if (_showChart || !isLandscape)
               Container(
-                height: availabelHeight * (isLandscape ? 0.7 : 0.3),
+                height: availabelHeight * (isLandscape ? 0.8 : 0.3),
                 child: Chart(
                   _recentTransactions,
                 ),
               ),
             if (!_showChart || !isLandscape)
               Container(
-                height: availabelHeight * 0.7,
+                height: availabelHeight * (isLandscape ? 1 : 0.7),
                 child: TransactionList(
                   _transactions,
                   _deleteTransaction,
@@ -207,7 +211,9 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: Platform.isIOS 
+          ? Container() 
+          : FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () => _openTransactionFormModal(context),
       ),
