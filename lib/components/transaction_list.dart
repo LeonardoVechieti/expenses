@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:expenses/components/transection_item.dart';
 import 'package:expenses/models/transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,7 +13,6 @@ class TransactionList extends StatelessWidget {
   TransactionList(this.transactions, this.onRemove);
 
   @override
-
   Widget build(BuildContext context) {
     return transactions.isEmpty
         ? LayoutBuilder(
@@ -23,7 +23,7 @@ class TransactionList extends StatelessWidget {
                     'Nenhuma Transação Cadastrada!',
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(height: 20), 
+                  const SizedBox(height: 20),
                   Container(
                     height: 200,
                     child: Image.asset(
@@ -39,43 +39,7 @@ class TransactionList extends StatelessWidget {
             itemCount: transactions.length,
             itemBuilder: (ctx, index) {
               final tr = transactions[index];
-              return ListTile(
-                leading: CircleAvatar(
-                  radius: 30,
-                  child: Padding(
-                    padding: const EdgeInsets.all(6),
-                    child: FittedBox(
-                      child: Text('R\$${tr.value}'),
-                    ),
-                  ),
-                ),
-                title: Text(
-                  tr.title,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                ),
-                subtitle: Text(
-                  DateFormat('d MMM y').format(tr.date),
-                ),
-                trailing: MediaQuery.of(context).size.width > 480
-                    ? TextButton.icon(
-                        onPressed: () => onRemove(tr.id),
-                        icon: const Icon(Icons.delete),
-                        label: const Text('Excluir'),
-                        style: TextButton.styleFrom(
-                          foregroundColor: Theme.of(context).colorScheme.error,
-                        ),
-                      )
-                    :
-                IconButton(
-                  icon: const Icon(Icons.delete),
-                  color: Theme.of(context).colorScheme.error,
-                  onPressed: () => onRemove(tr.id),
-                ),
-              );
+              return TransectionItem(tr: tr, onRemove: onRemove);
             },
           );
   }
