@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:expenses/models/transaction.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 
 class TransactionList extends StatelessWidget {
@@ -9,18 +12,18 @@ class TransactionList extends StatelessWidget {
   TransactionList(this.transactions, this.onRemove);
 
   @override
+
   Widget build(BuildContext context) {
     return transactions.isEmpty
         ? LayoutBuilder(
             builder: (context, constraints) {
               return Column(
                 children: [
-                  Text(
+                  const Text(
                     'Nenhuma Transação Cadastrada!',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(
-                    height: 20,
-                  ),
+                  const SizedBox(height: 20), 
                   Container(
                     height: 200,
                     child: Image.asset(
@@ -66,11 +69,12 @@ class TransactionList extends StatelessWidget {
                           foregroundColor: Theme.of(context).colorScheme.error,
                         ),
                       )
-                    : IconButton(
-                        icon: const Icon(Icons.delete),
-                        color: Theme.of(context).colorScheme.error,
-                        onPressed: () => onRemove(tr.id),
-                      ),
+                    :
+                IconButton(
+                  icon: const Icon(Icons.delete),
+                  color: Theme.of(context).colorScheme.error,
+                  onPressed: () => onRemove(tr.id),
+                ),
               );
             },
           );
